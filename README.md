@@ -17,5 +17,6 @@ Recipe to build [`amdavidson/vpn-server`](https://registry.hub.docker.com/u/amda
 Transfer the generated `ikev2-vpn.mobileconfig` file to your local computer via SSH tunnel (`scp`) or any other secure methods.
 
 ## License
-
-Copyright (c) 2016 Mengdi Gao, This software is licensed under the [MIT License](LICENSE).
+Copyright (c) 2019 Andrew Davidson
+Copyright (c) 2016 Mengdi Gao
+This software is licensed under the [MIT License](LICENSE).
