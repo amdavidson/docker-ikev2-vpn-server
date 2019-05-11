@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install strongswan iptables uuid-runtime ndppd openssl \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install strongswan iptables uuid-runtime ndppd openssl
 
 RUN rm /etc/ipsec.secrets
 RUN mkdir /config
