@@ -39,6 +39,11 @@ SHARED_SECRET="123$(openssl rand -base64 32 2>/dev/null)"
 # hotfix for https://github.com/gaomd/docker-ikev2-vpn-server/issues/7
 rm -f /var/run/starter.charon.pid
 
+# Allow DNS changes https://github.com/amdavidson/vpn-server/issues/5
+if [ -n $DNS ]; then
+    sed -i "s/dns = .*/dns = $DNS/" /etc/strongswan.conf
+fi
+
 service ndppd start
 # http://wiki.loopop.net/doku.php?id=server:vpn:strongswanonopenvz
 /usr/sbin/ipsec start --nofork
