@@ -22,18 +22,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# TODO: add regenerate shared secret option
-
 # In normal cases, you will only need to pass the HOST of your server.
 [ "no${HOST}" = "no" ] && echo "\$HOST environment variable required." && exit 1
 
-: ${PROFILE_NAME="My IKEv2 VPN Profile"}
+: ${PROFILE_NAME="IKEv2 VPN Profile"}
 : ${PROFILE_IDENTIFIER=$(echo -n "${HOST}." | tac -s. | sed 's/\.$//g')}
 : ${PROFILE_UUID=$(hostname)}
 
 # These variable, especially CONN_UUID, are bind to per username,
 # which currently, all users share the same secrets and configurations.
-: ${CONN_NAME="My IKEv2 VPN"}
+: ${CONN_NAME="IKEv2 VPN"}
 : ${CONN_IDENTIFIER="${PROFILE_IDENTIFIER}.shared-configuration"}
 : ${CONN_UUID=$(uuidgen)}
 : ${CONN_HOST=${HOST}}
@@ -105,6 +103,19 @@ cat <<EOF
                         <dict>
                             <key>Action</key>
                             <string>Connect</string>
+                            <key>InterfaceTypeMatch</key>
+                            <string>WiFi</string>
+                        </dict>
+                        <dict>
+                            <key>Action</key>
+                            <string>Disconnect</string>
+                            <key>InterfaceTypeMatch</key>
+                            <string>WiFi</string>
+                            <key>SSIDMatch</key>
+                            <array>
+                                <!-- List one or more WiFi networks -->
+                                <string>${SAFE_SSID}</string>
+                            </array>
                         </dict>
                     </array>
                     <!-- The server is authenticated using a certificate -->
