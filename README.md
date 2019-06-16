@@ -6,9 +6,11 @@ Recipe to build [`amdavidson/vpn-server`](https://registry.hub.docker.com/u/amda
 
 ### 1. Start the IKEv2 VPN Server
 
-    docker run --privileged -d \
+    docker run -d \
     --name vpn-server \
     --restart=always \
+    --cap-add=NET_ADMIN \
+    -v vpn-server-etc:/etc \
     -p 500:500/udp -p 4500:4500/udp \
     -e "DNS=9.9.9.9" \
     -e "SAFE_SSID=my home ssid" \
@@ -22,7 +24,7 @@ Recipe to build [`amdavidson/vpn-server`](https://registry.hub.docker.com/u/amda
     amdavidson/vpn-server:latest \
     generate-mobileconfig > ikev2-vpn.mobileconfig
 
-*Be sure to replace `vpn1.example.com` with your own domain name and resolve it to you server's IP address. 
+Be sure to replace `vpn1.example.com` with your own domain name and resolve it to you server's IP address. 
 
 Transfer the generated `ikev2-vpn.mobileconfig` file to your local computer via SSH tunnel (`scp`) or any other secure methods.
 
