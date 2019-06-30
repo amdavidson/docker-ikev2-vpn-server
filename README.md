@@ -13,7 +13,6 @@ Recipe to build [`amdavidson/vpn-server`](https://registry.hub.docker.com/u/amda
     -v vpn-server-etc:/etc \
     -p 500:500/udp -p 4500:4500/udp \
     -e "DNS=9.9.9.9" \
-    -e "SAFE_SSID=my home ssid" \
     amdavidson/vpn-server:latest
 
 ### 2. Generate the .mobileconfig (for iOS / macOS)
@@ -21,6 +20,7 @@ Recipe to build [`amdavidson/vpn-server`](https://registry.hub.docker.com/u/amda
     docker run -it --rm \
     --volumes-from vpn-server \
     -e "HOST=vpn1.example.com" \
+    -e "SAFE_SSID=my home ssid" \
     amdavidson/vpn-server:latest \
     generate-mobileconfig > ikev2-vpn.mobileconfig
 
