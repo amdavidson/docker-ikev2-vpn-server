@@ -41,7 +41,7 @@ rm -f /var/run/starter.charon.pid
 
 # Allow DNS changes https://github.com/amdavidson/vpn-server/issues/5
 if [ -n $DNS ]; then
-    sed -i "s/dns = .*/dns = $DNS/" /etc/strongswan.conf
+    sed -i "s/dns = .*/dns = ${DNS}/" /etc/strongswan.conf
 fi
 
 service ndppd start
